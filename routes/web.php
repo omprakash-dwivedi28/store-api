@@ -8,11 +8,8 @@ $controllerPath = realpath(__DIR__ . "/../app/controller/AuthController.php");
 if ($controllerPath === false) {
     die("AuthController.php not found at: " . __DIR__ . "/../app/controllers/AuthController.php");
 }
-
 require_once $controllerPath;
-
 $auth = new AuthController($conn);
-
 $route = $_GET['route'] ?? 'login';
 
 switch ($route) {
