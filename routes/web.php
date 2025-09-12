@@ -1,27 +1,36 @@
 <?php
-require_once __DIR__ . "/../config/config.php";
-
-// Use realpath to avoid path issues on Windows/Linux
-// $controllerPath = realpath(__DIR__ . "/../app/controllers/AuthController.php");
-$controllerPath = realpath(__DIR__ . "/../app/controller/AuthController.php");
-
-if ($controllerPath === false) {
-    die("AuthController.php not found at: " . __DIR__ . "/../app/controllers/AuthController.php");
-}
-require_once $controllerPath;
-$auth = new AuthController($conn);
 $route = $_GET['route'] ?? 'login';
 
+// Auth Controller
+require_once __DIR__ . '/../app/controllers/AuthController.php';
+$authController = new AuthController();
+
+// Routes
 switch ($route) {
     case 'login':
-        $auth->login();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $authController->login($_POST);
+        } else {
+            $authController->showLogin();
+        }
         break;
-    case 'dashboard':
-        $auth->dashboard();
-        break;
+
     case 'logout':
-        $auth->logout();
+        $authController->logout();
         break;
+
+    case 'admin-dashboard':
+        require_once __DIR__ . '/../app/controllers/AdminController.php';
+        $controller = new AdminController();
+        $controller->dashboard();
+        break;
+
+    case 'user-dashboard':
+        require_once __DIR__ . '/../app/controllers/UserController.php';
+        $controller = new UserController();
+        $controller->dashboard();
+        break;
+
     default:
-        $auth->login();
+        echo "404 - Page Not Found";
 }
