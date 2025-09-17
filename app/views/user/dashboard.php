@@ -12,7 +12,7 @@
         <h2>Welcome, <?php echo htmlspecialchars($user['username']); ?> 🎉</h2>
         <p>Your role: <span class="role"><?php echo ucfirst($user['role']); ?></span></p>
 
-        <a href="index.php?route=profile" class="button user"> Billing Page</a>
+       <a href="index.php?route=billing" class="button user">Billing Page</a>
         <a href="index.php?route=settings" class="button user">Settings</a>
         <a href="index.php?route=logout" class="button logout">Logout</a>
     </div>

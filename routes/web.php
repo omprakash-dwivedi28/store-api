@@ -31,6 +31,14 @@ switch ($route) {
         $controller->dashboard();
         break;
 
+    case 'billing':
+           include __DIR__ . '/../app/views/user/billing.php';
+            break;
+
+    case 'save_bill':
+        include __DIR__ . '/../app/views/user/save_bill.php';
+        break;
+
     default:
         echo "404 - Page Not Found";
 }
