@@ -42,6 +42,18 @@ switch ($route) {
     case 'cust_master':
            include __DIR__ . '/../app/views/admin/customer_master.php';
             break;
+    case 'customer_edit':
+           include __DIR__ . '/../app/views/admin/customer_edit.php';
+            break;
+    case 'customer_update':
+           include __DIR__ . '/../app/views/admin/customer_update.php';
+            break;
+     case 'customer_detail':
+           include __DIR__ . '/../app/views/admin/customer_detail.php';
+            break;
+      case 'customer_add':
+           include __DIR__ . '/../app/views/admin/customer_add.php';
+            break;
 
     default:
         echo "404 - Page Not Found";
