@@ -11,7 +11,7 @@
         <p>Your role: <span class="role"><?php echo ucfirst($user['role']); ?></span></p>
 
         <a href="index.php?route=manage-users" class="button admin">Area Master</a>
-        <a href="index.php?route=reports" class="button admin">Customer Master</a>
+        <a href="index.php?route=cust_master" class="button admin">Customer Master</a>
         <a href="index.php?route=logout" class="button logout">Logout</a>
     </div>
 </body>

@@ -39,6 +39,10 @@ switch ($route) {
         include __DIR__ . '/../app/views/user/save_bill.php';
         break;
 
+    case 'cust_master':
+           include __DIR__ . '/../app/views/admin/customer_master.php';
+            break;
+
     default:
         echo "404 - Page Not Found";
 }

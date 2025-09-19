@@ -17,11 +17,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$customer_id, $bill_no, $bill_amount, $bill_date, $remark]);
 
-        // ✅ Redirect to billing.php (correct path)
-        header("Location: /app/views/user/billing.php?success=1");
+        // ✅ Show message before redirect
+        echo "<h2 style='color:green;'>✅ Bill saved successfully!</h2>";
+        echo "<p>Redirecting to billing page...</p>";
+        echo "<script>
+                setTimeout(function(){
+                    window.location.href = 'index.php?route=billing&success=1';
+                }, 2000); // 2 seconds delay
+              </script>";
         exit;
     } else {
-        header("Location: /app/views/user/billing.php?error=1");
+        echo "<h2 style='color:red;'>❌ Failed to save bill. Missing required fields.</h2>";
+        echo "<p>Redirecting back to billing page...</p>";
+        echo "<script>
+                setTimeout(function(){
+                    window.location.href = 'index.php?route=billing&error=1';
+                }, 2000);
+              </script>";
         exit;
     }
 }
+?>
