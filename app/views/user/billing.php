@@ -2,7 +2,6 @@
 require_once __DIR__ . '/../../../config/db.php';
 $db = new Database();
 
-
 $pdo = $db->connect();   // ✅ Create the PDO object
 
 // Fetch customer list
@@ -37,6 +36,13 @@ $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <label for="bill_date">Bill Date:</label>
             <input type="date" id="bill_date" name="bill_date" required>
+
+            <label for="bill_type">Bill Type:</label>
+            <select name="bill_type" id="bill_type" required>
+                <option value="">-- Select Type --</option>
+                <option value="d">Debit</option>
+                <option value="c">Credit</option>
+            </select>
 
             <label for="remark">Remark:</label>
             <textarea id="remark" name="remark"></textarea>
