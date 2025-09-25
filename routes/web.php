@@ -34,6 +34,9 @@ switch ($route) {
     case 'billing':
            include __DIR__ . '/../app/views/user/billing.php';
             break;
+     case 'cust_wise_due':
+           include __DIR__ . '/../app/views/user/customer_due.php';
+            break;
 
     case 'save_bill':
         include __DIR__ . '/../app/views/user/save_bill.php';
@@ -54,6 +57,7 @@ switch ($route) {
       case 'customer_add':
            include __DIR__ . '/../app/views/admin/customer_add.php';
             break;
+            
 
     default:
         echo "404 - Page Not Found";

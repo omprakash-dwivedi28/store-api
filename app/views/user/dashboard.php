@@ -13,6 +13,7 @@
         <p>Your role: <span class="role"><?php echo ucfirst($user['role']); ?></span></p>
 
        <a href="index.php?route=billing" class="button user">Billing Page</a>
+        <a href="index.php?route=cust_wise_due" class="button user">Customer wise Due</a>
         <a href="index.php?route=settings" class="button user">Settings</a>
         <a href="index.php?route=logout" class="button logout">Logout</a>
     </div>
