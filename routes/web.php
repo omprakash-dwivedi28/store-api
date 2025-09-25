@@ -42,6 +42,12 @@ switch ($route) {
         include __DIR__ . '/../app/views/user/save_bill.php';
         break;
 
+    case 'area_master':
+           include __DIR__ . '/../app/views/admin/area_master.php';
+            break;
+    case 'add':
+           include __DIR__ . '/../app/views/admin/area_master.php';
+            break;
     case 'cust_master':
            include __DIR__ . '/../app/views/admin/customer_master.php';
             break;
