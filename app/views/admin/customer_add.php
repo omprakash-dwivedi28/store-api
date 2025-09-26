@@ -6,6 +6,10 @@ require_once __DIR__ . '/../../../config/db.php';
 $db = new Database();
 $pdo = $db->connect();
 
+// Fetch all areas for the dropdown
+$areas = $pdo->query("SELECT area_id, area_name FROM area_master ORDER BY area_name ASC")
+             ->fetchAll(PDO::FETCH_ASSOC);
+
 // ✅ Insert or Update Logic
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $customer_id   = $_POST['customer_id'] ?? null;
@@ -13,24 +17,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $contact_no    = $_POST['contact_no'];
     $email         = $_POST['email'];
     $address       = $_POST['address'];
+    $area_id = $_POST['area_id'] ?? null;
+
+
 
     if ($customer_id) {
         // Update existing record
         $sql = "UPDATE customer_master 
-                SET customer_name=?, contact_no=?, email=?, address=? 
+                SET customer_name=?, contact_no=?, email=?, address=?,area_id=?  
                 WHERE customer_id=?";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$customer_name, $contact_no, $email, $address, $customer_id]);
+        $stmt->execute([$customer_name, $contact_no, $email, $address, $area_id,$customer_id]);
 
         // Redirect to detail page
         header("Location: ?detail=" . $customer_id . "&updated=1");
         exit;
     } else {
         // Insert new record
-        $sql = "INSERT INTO customer_master (customer_name, contact_no, email, address) 
-                VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO customer_master (customer_name, contact_no, email, address,area_id) 
+                VALUES (?, ?, ?, ?,?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$customer_name, $contact_no, $email, $address]);
+        $stmt->execute([$customer_name, $contact_no, $email, $address,$area_id]);
 
         header("Location: ?added=1");
         exit;
@@ -90,6 +97,8 @@ if (isset($_GET['edit'])) {
         <!-- ✅ Detail Page -->
         <h3>📄 Customer Details</h3>
         <table>
+   
+
             <tr><th>ID</th><td><?= $detailCustomer['customer_id'] ?></td></tr>
             <tr><th>Name</th><td><?= htmlspecialchars($detailCustomer['customer_name']) ?></td></tr>
             <tr><th>Contact</th><td><?= htmlspecialchars($detailCustomer['contact_no']) ?></td></tr>
@@ -128,6 +137,13 @@ if (isset($_GET['edit'])) {
         <div class="form-box">
             <h3>➕ Add Customer</h3>
             <form method="POST">
+                         <label>Area</label>
+            <select name="area_id" required>
+             <option value="">-- Select Area --</option>
+             <?php foreach ($areas as $area): ?>
+             <option value="<?= $area['area_id'] ?>"><?= htmlspecialchars($area['area_name']) ?></option>
+             <?php endforeach; ?>
+            </select>
                 <label>Customer Name</label>
                 <input type="text" name="customer_name" required>
 
